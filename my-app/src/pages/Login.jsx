@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, FormGroup, Label, Input, Button, FormFeedback } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, FormFeedback, Card } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -80,23 +80,24 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     if(!isValid)return;
+
     axios.post('https://reqres.in/api/user', form)
-      .then((res) => {
-        history.push('/success');
+     .then((response) => {
+        response.password == form.password && response.email == form.email
         setForm(initialValues);
-       
-      })
+        history.push('/success');
+     })
       .catch((error) => {
         console.error('Login Error:', error);
       });
+    
     }
-
   
    
 
   return (
+    <Card>
     <Form onSubmit={handleSubmit} >
       <FormGroup>
         <Label for="email">Email</Label>
@@ -146,5 +147,6 @@ export default function Login() {
         </Button>
       </FormGroup>
     </Form>
+    </Card>
   )
 }
