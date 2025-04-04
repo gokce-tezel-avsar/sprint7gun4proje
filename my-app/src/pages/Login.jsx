@@ -139,7 +139,7 @@ export default function Login() {
         <Label for="terms">
           I agree to terms of service and privacy policy
         </Label>
-      </FormGroup>
+      </FormGroup>{errors.terms && <FormFeedback data-cy="error-input">{errorMessages.terms}</FormFeedback>}
 
       <FormGroup className="text-center p-4">
         <Button data-cy="register-button" disabled={!isDisabled} color="primary">
